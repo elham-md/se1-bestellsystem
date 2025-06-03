@@ -5,6 +5,7 @@
 # example: https://github.com/github/gitignore/blob/master/Java.gitignore
 #------------------------------------------------------------------------------
 
+<<<<<<< HEAD
 # ignore .gitignore file and git submodules
 .gitignore
 .env
@@ -14,6 +15,16 @@ env
 env.sh
 vscode
 libs
+=======
+# ignore project-specific files and links
+env.sh
+.env.sh
+
+# ignore changes in git submodules
+.env/
+.vscode/
+libs/
+>>>>>>> d8f0873 (add .gitignore)
 
 # ignore generated directories and compiled output (generated)
 bin/
