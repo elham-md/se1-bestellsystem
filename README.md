@@ -97,7 +97,11 @@ repository into a new folder `"se1-bestellsystem"` into your workspace:
 # clone the branch 'main' into your workspace for the new project
 git clone -b main --single-branch https://github.com/sgra64/se1-bestellsystem.git
 
+
 # remove the remote URL
+
+# remove the remote URL from the project
+
 git remote remove origin
 ```
 
@@ -121,6 +125,9 @@ drwxr-xr-x 1    0 May 25 22:51 .env/            <-- git-submodule '.env'
 drwxr-xr-x 1    0 May 25 22:36 .git/            <-- local git repository
 -rw-r--r-- 1 1257 May 25 20:41 .gitignore
 -rw-r--r-- 1  304 May 25 21:04 .gitmodules
+
+-rw-r--r-- 1 3045 Jun  3 20:16 .gitmodules.sh
+
 drwxr-xr-x 1    0 May 25 22:54 .vscode/         <-- git-submodule '.vscode'
 drwxr-xr-x 1    0 May 25 22:19 libs/            <-- git-submodule 'libs'
 -rw-r--r-- 1 8347 May 25 22:54 README.md
@@ -129,7 +136,17 @@ drwxr-xr-x 1    0 May 25 20:13 src/             <-- Java source code
 drwxr-xr-x 1    0 May 25 21:53 tests/           <-- Java JUnit test code
 ```
 
+
 Source the project:
+
+
+
+&nbsp;
+
+## 2. Project Build & Run
+
+Source the project to set the environment:
+
 
 ```sh
 ln -s .env/env.sh .env.sh           # set symbolic link to sourcing script
@@ -139,9 +156,11 @@ source .env.sh                      # source the project
 
 
 
+
 &nbsp;
 
 ## 2. Project Build & Run
+
 
 Build and run the project:
 
@@ -211,10 +230,15 @@ libs/logging/slf4j-api-2.0.17.jar
 added manifest
 added module-info: module-info.class
 adding: application/(in = 0) (out= 0)(stored 0%)
+
 adding: application/Application.class(in = 2753) (out= 1263)(deflated 54%)
 adding: application/Runner.class(in = 144) (out= 124)(deflated 13%)
 adding: application/package-info.class(in = 117) (out= 101)(deflated 13%)
 adding: application/package_info.class(in = 333) (out= 260)(deflated 21%)
+adding: application/Application.class(in = 2629) (out= 1208)(deflated 54%)
+adding: application/Runner.class(in = 144) (out= 124)(deflated 13%)
+adding: application/package_info.class(in = 333) (out= 261)(deflated 21%)
+
 ```
 
 Show and run the packaged `.jar` file:
