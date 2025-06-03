@@ -1,32 +1,34 @@
 /**
- * Modules have been introduced in Java 9 (in 2017) to compose software from
- * modularized projects. Prior, only packages within a project could be used.
+ * Modules have been introduced in Java 9 (2017) to compose software from
+ * multiple modularized Java projects. Prior to this, only packages within
+ * a single project could be composed.
  *
  * {@code module-info.java} indicates a <i>modularized</i> Java project. It
- * includes the module name: {@link se1.bestellsystem}, other modules required
- * by this module and project packages opened and exported to other modules.
+ * defines the module name {@link se1.bestellsystem}, other modules required
+ * by this module, and packages that are opened or exported to other modules.
  * 
- * Opening a package makes it accessible to tools such as JUnit test runners.
- * Exporting a package makes it accessible to other modules.
+ * <p> Opening a package makes it accessible to tools such as JUnit test runners.
+ * Exporting a package makes it accessible to other modules at compile and runtime.
  *
- * Locations of <i>required</i> modules must be provided via {@code MODULEPATH}.
+ * <p> Locations of <i>required</i> modules must be provided via {@code MODULEPATH}.
  *
- * @version <code style=color:green>{@value application.package_info#Version}</code>
- * @author <code style=color:blue>{@value application.package_info#Author}</code>
+ * @version <code style="color:green">{@value application.package_info#Version}</code>
+ * @author  <code style="color:blue">{@value application.package_info#Author}</code>
  */
 module se1.bestellsystem {
 
-    /*
-     * Make package {@code application} accessible to other modules at compile
-     * and runtime (use <i>open</i> for compile-time access only).
+    /**
+     * Make package {@code application} accessible to other modules at compile- and runtime.
      */
     exports application;
 
-    /* Open package to JUnit test runner. */
+    /**
+     * Open package {@code application} for use by tools such as JUnit test runners.
+     */
     opens application;
 
-    /*
-     * External module required by this module (JUnit-5 module for JUnit testing).
+    /**
+     * Declare dependency on external module JUnit Jupiter API for testing.
      */
     requires org.junit.jupiter.api;
 }
