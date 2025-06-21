@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 # Project C1: *se1-bestellsystem*
 
@@ -85,6 +86,8 @@ course has the following steps:
 
     - 3.5 [Local "*tracking*" Branch](#35-local-tracking-branch)
 
+=======
+>>>>>>> 9bf366bf3b74588c13f01b8164c2873a78a9a157
 # C2: *Customer.java*
 
 Steps:
@@ -99,6 +102,7 @@ Steps:
 
 
 
+<<<<<<< HEAD
 
 &nbsp;
 
@@ -153,6 +157,10 @@ drwxr-xr-x 1    0 May 25 21:53 tests/           <-- Java JUnit test code
 
 Source the project:
 
+=======
+&nbsp;
+
+>>>>>>> 9bf366bf3b74588c13f01b8164c2873a78a9a157
 ## 1. Branch Assembly
 
 Tag the latest commit on branch `main` with `"base"`.
@@ -262,6 +270,7 @@ Hello, se1.bestellsystem (Application_C12, modular)
 
 
 
+<<<<<<< HEAD
 
 &nbsp;
 
@@ -278,6 +287,10 @@ source .env.sh                      # source the project
 ```
 
 
+=======
+&nbsp;
+
+>>>>>>> 9bf366bf3b74588c13f01b8164c2873a78a9a157
 ## 2. Supplement Class *Customer.java* with *Javadoc*
 
 Create class `Customer.java` in package `datamodel` from the *UML Class Diagram:* 
@@ -342,6 +355,7 @@ Both should be identical, except for the `Autor:` tag, which should show your na
 
 
 
+<<<<<<< HEAD
 
 &nbsp;
 
@@ -684,6 +698,10 @@ git pull
 pit push
 ```
 
+=======
+&nbsp;
+
+>>>>>>> 9bf366bf3b74588c13f01b8164c2873a78a9a157
 ## 3. Implement Class *Customer.java*
 
 Implement methods according to the *Javadoc* specifications.
@@ -741,4 +759,7 @@ When tests are passing and Javadoc has been sucessfully created:
 1. Merge branch `c12-customer` to your local `main` branch.
 
 1. Push branch `main` also to your remote repository.
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9bf366bf3b74588c13f01b8164c2873a78a9a157
