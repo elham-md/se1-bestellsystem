@@ -77,8 +77,10 @@ public class Customer {
      * @throws IllegalArgumentException bei negativem Id-Wert
      */
     public Customer setId(long id) {
-        if (id < 0) throw new IllegalArgumentException("id < 0");
-        if (this.id == -1) this.id = id;        // nur erste Zuweisung gültig
+        if (id < 0)
+            throw new IllegalArgumentException("invalid id (negative)");
+        if (this.id == -1)
+            this.id = id;
         return this;
     }
 
@@ -139,17 +141,16 @@ public class Customer {
      * @return chainable self reference
      * @throws IllegalArgumentException bei {@code null}/leerem Kontakt
      */
-public Customer addContact(String contact) {
-    String trimmed = trim(contact);
-    if (trimmed.length() < 6) {
-        throw new IllegalArgumentException("contact less than 6 characters: \"" + contact + "\".");
+    public Customer addContact(String contact) {
+        String trimmed = trim(contact);
+        if (trimmed.length() < 6) {
+            throw new IllegalArgumentException("contact less than 6 characters: \"" + contact + "\".");
+        }
+        if (!contacts.contains(trimmed)) {
+            contacts.add(trimmed);
+        }
+        return this;
     }
-    if (!contacts.contains(trimmed)) {
-        contacts.add(trimmed);
-    }
-    return this;
-    }
-
 
     /**
      * Löscht den <i>i</i>-ten Kontakt, falls Index gültig ist.

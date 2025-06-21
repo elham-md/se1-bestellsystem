@@ -1,65 +1,90 @@
 package datamodel;
 
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Tests für {@link Customer}: Nummern-Bereich [200‥299] – ID-Tests.
- *
- * @author Sakina Mohammadi
- */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class Customer_200_Id_Tests {
+public class Customer_200_Id_Tests {
 
-    /** Regular 200: ID -1 nach Konstruktor, dann gültige ID setzen. */
-    @Test @Order(200)
-    void test200_setIdOnce() {
-        Customer c = new Customer();
-        assertEquals(-1, c.getId());
-        c.setId(0);
-        assertEquals(0, c.getId());
-        c.setId(99); // ignoriert
-        assertEquals(0, c.getId());
+    private Customer customer;
+
+    @BeforeEach
+    void setup() {
+        customer = new Customer();
     }
 
-    /** Regular 201: mehrere gültige IDs probieren. Nur der erste zählt. */
-    @Test @Order(201)
-    void test201_setIdOnlyOnce() {
-        Customer c = new Customer("Test Name");
-        assertEquals(-1, c.getId());
-        c.setId(7);
-        assertEquals(7, c.getId());
-        c.setId(1234); // wird ignoriert
-        assertEquals(7, c.getId());
+    // 200: getId() direkt nach Konstruktion → null
+    @Test
+    @Order(200)
+    void test200_IdNullAfterConstruction() {
+        assertEquals(-1, customer.getId());
     }
 
-    /** Corner 210: größte zulässige ID (Long.MAX_VALUE). */
-    @Test @Order(210)
-    void test210_setId_MaxLong() {
-        Customer c = new Customer();
-        c.setId(Long.MAX_VALUE);
-        assertEquals(Long.MAX_VALUE, c.getId());
+    // 201: setId(x) → getId() == x
+    @Test
+    @Order(201)
+    void test201_setIdRegularValue() {
+        Long x = 1000L;
+        customer.setId(x);
+        assertEquals(x, customer.getId());
     }
 
-    /** Error 220: negative ID (z. B. -5) → Exception. */
-    @Test @Order(220)
-    void test220_setIdNegative() {
-        Customer c = new Customer();
-        IllegalArgumentException ex = assertThrows(
-            IllegalArgumentException.class, () -> c.setId(-5)
-        );
-        assertEquals("id < 0", ex.getMessage());
-        assertEquals(-1, c.getId()); // ID bleibt unverändert
+    // 202: setId(x), setId(y) → getId() == x
+    @Test
+    @Order(202)
+    void test202_setIdRegularValueTwice() {
+        Long x = 1000L;
+        Long y = 2000L;
+        customer.setId(x);
+        customer.setId(y);
+        assertEquals(x, customer.getId());
     }
 
-    /** Error 221: setId(-1) sollte auch nicht erlaubt sein. */
-    @Test @Order(221)
-    void test221_setIdNegativeOne() {
-        Customer c = new Customer("Test");
-        IllegalArgumentException ex = assertThrows(
-            IllegalArgumentException.class, () -> c.setId(-1)
-        );
-        assertEquals("id < 0", ex.getMessage());
-        assertEquals(-1, c.getId());
+    // 210: setId(x), setId(x+1) → getId() == x
+    @Test
+    @Order(210)
+    void test210_setIdMinValue() {
+        Long x = 1L;
+        customer.setId(x);
+        customer.setId(x + 1);
+        assertEquals(x, customer.getId());
+    }
+
+    // 211: setId(x), setId(x-1) → getId() == x
+    @Test
+    @Order(211)
+    void test211_setIdMaxValue() {
+        Long x = Long.MAX_VALUE - 1;
+        customer.setId(x);
+        customer.setId(x - 1);
+        assertEquals(x, customer.getId());
+    }
+
+    // 212: setId(0) → erlaubt, wenn gültig
+    @Test
+    @Order(212)
+    void test212_setIdZeroValue() {
+        customer.setId(0L);
+        assertEquals(0L, customer.getId());
+    }
+
+    // 220: setId(-1) → Exception mit Message
+    @Test
+    @Order(220)
+    void test220_setIdWithNegativeArguments() {
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
+            customer.setId(-1L);
+        });
+        assertEquals("invalid id (negative)", thrown.getMessage());
+    }
+
+    // 221: setId(Long.MIN_VALUE) → Exception mit Message
+    @Test
+    @Order(221)
+    void test221_setIdWithMinLongValue() {
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
+            customer.setId(Long.MIN_VALUE);
+        });
+        assertEquals("invalid id (negative)", thrown.getMessage());
     }
 }
