@@ -256,4 +256,9 @@ public class Application_C12 implements Runner {
 
         private TableFormatter endRow() { sb.append("\n"); return this; }
     }
+        public static void main(String[] args) {
+        System.out.println("Hello, se1.bestellsystem (Application_C12, modular)");
+        new Application_C12().run(args);
+    }
+
 }

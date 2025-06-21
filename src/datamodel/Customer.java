@@ -1,102 +1,106 @@
 package datamodel;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
+/**
+ * Repräsentiert einen Kunden mit ID, Namen und Kontaktdaten.
+ * Unterstützt die Zerlegung eines Namens in Vor- und Nachnamen.
+ *
+ * @author Sakina Mohammadi
+ * @version 1.0
+ */
 public class Customer {
 
-    public Customer() { }
+    private long id;
+    private String firstName = "";
+    private String lastName = "";
+    private final List<String> contacts = new ArrayList<>();
 
-    public Customer(String name) { }
+    public Customer() {}
 
+    public Customer(String name) {
+        splitName(name);
+    }
 
     public long getId() {
-        return 0L;
+        return id;
     }
 
     public Customer setId(long id) {
+        this.id = id;
         return this;
     }
 
     public String getLastName() {
-        return "";
+        return lastName;
     }
 
     public String getFirstName() {
-        return "";
+        return firstName;
     }
 
     public Customer setName(String first, String last) {
+        this.firstName = trim(first);
+        this.lastName = trim(last);
         return this;
     }
 
     public Customer setName(String name) {
+        splitName(name);
         return this;
     }
 
     public int contactsCount() {
-        return 0;
+        return contacts.size();
     }
 
     public Iterable<String> getContacts() {
-        return java.util.List.of();
+        return Collections.unmodifiableList(contacts);
     }
 
     public Customer addContact(String contact) {
+        contacts.add(trim(contact));
         return this;
     }
 
     public void deleteContact(int i) {
-        throw new UnsupportedOperationException("method deleteContact(i) has not yet been implemented");
+        if (i < 0 || i >= contacts.size()) {
+            throw new IndexOutOfBoundsException("Ungültiger Index: " + i);
+        }
+        contacts.remove(i);
     }
 
     public void deleteAllContacts() {
-        throw new UnsupportedOperationException("method deleteAllContacts() has not yet been implemented");
+        contacts.clear();
     }
 
     /**
-     * Split single-String name into last- and first name parts according to
-     * rules:
-     * <ul>
-     * <li> if a name contains no seperators (comma or semicolon {@code [,;]}),
-     *      the trailing consecutive part is the last name, all prior parts
-     *      are first name parts, e.g. {@code "Tim Anton Schulz-Müller"}, splits
-     *      into <i>first name:</i> {@code "Tim Anton"} and <i>last name</i>
-     *      {@code "Schulz-Müller"}.
-     * <li> names with seperators (comma or semicolon {@code [,;]}) split into
-     *      a last name part before the seperator and a first name part after
-     *      the seperator, e.g. {@code "Schulz-Müller, Tim Anton"} splits into
-     *      <i>first name:</i> {@code "Tim Anton"} and <i>last name</i>
-     *      {@code "Schulz-Müller"}.
-     * <li> leading and trailing white spaces {@code [\s]}, commata {@code [,;]}
-     *      and quotes {@code ["']} must be trimmed from names, e.g.
-     *      {@code "  'Schulz-Müller, Tim Anton'    "}.
-     * <li> interim white spaces between name parts must be trimmed, e.g.
-     *      {@code "Schulz-Müller, <white-spaces> Tim <white-spaces> Anton <white-spaces> "}.
-     * </ul>
-     * <pre>
-     * Examples:
-     * +------------------------------------+-----------------------+-----------------------+
-     * |Single-String name                  |first name parts       |last name parts        |
-     * +------------------------------------+-----------------------+-----------------------+
-     * |"Eric Meyer"                        |"Eric"                 |"Meyer"                |
-     * |"Meyer, Anne"                       |"Anne"                 |"Meyer"                |
-     * |"Meyer; Anne"                       |"Anne"                 |"Meyer"                |
-     * |"Tim Schulz‐Mueller"                |"Tim"                  |"Schulz‐Mueller"       |
-     * |"Nadine Ulla Blumenfeld"            |"Nadine Ulla"          |"Blumenfeld"           |
-     * |"Nadine‐Ulla Blumenfeld"            |"Nadine‐Ulla"          |"Blumenfeld"           |
-     * |"Khaled Saad Mohamed Abdelalim"     |"Khaled Saad Mohamed"  |"Abdelalim"            |
-     * +------------------------------------+-----------------------+-----------------------+
-     * 
-     * Trim leading, trailing and interim white spaces and quotes:
-     * +------------------------------------+-----------------------+-----------------------+
-     * |" 'Eric Meyer'  "                   |"Eric"                 |"Meyer"                |
-     * |"Nadine     Ulla     Blumenfeld"    |"Nadine Ulla"          |"Blumenfeld"           |
-     * +------------------------------------+-----------------------+-----------------------+
-     * </pre>
-     * @param name single-String name to split into first- and last name parts
-     * @throws IllegalArgumentException if name argument is null or empty
+     * Split single-String name into last- and first name parts according to rules...
      */
     public void splitName(String name) {
-        throw new UnsupportedOperationException("method splitName(name) has not yet been implemented");
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Name darf nicht leer sein.");
+        }
+
+        String cleaned = trim(name);
+
+        // Trenne an erstem Komma oder Semikolon
+        if (cleaned.contains(",") || cleaned.contains(";")) {
+            String[] parts = cleaned.split("[,;]", 2);
+            this.lastName = trim(parts[0]);
+            this.firstName = trim(parts[1]);
+        } else {
+            String[] words = cleaned.trim().split("\\s+");
+            if (words.length == 1) {
+                this.firstName = "";
+                this.lastName = words[0];
+            } else {
+                this.firstName = String.join(" ", java.util.Arrays.copyOf(words, words.length - 1));
+                this.lastName = words[words.length - 1];
+            }
+        }
     }
 
     /**

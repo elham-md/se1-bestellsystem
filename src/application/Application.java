@@ -3,6 +3,7 @@ package application;
 import java.util.Arrays;
 import java.util.Optional;
 
+
 /**
  * Die {@link Application}-Klasse enthält die {@code main()}-Methode als
  * Einstiegspunkt für die Java Virtual Machine. Sie implementiert das
@@ -17,7 +18,8 @@ public class Application implements Runner {
     /**
      * Singleton-Instanz von {@link Application}.
      */
-    private static final Application application = new Application();
+    //private static final Application application = new Application();
+    private static final Runner application = new Application_C12();
 
     /**
      * Privater Konstruktor verhindert externe Instanziierung.
@@ -31,7 +33,8 @@ public class Application implements Runner {
      * @param args Kommandozeilenargumente
      */
     public static void main(String[] args) {
-        application.execute(application, args);
+        // execute(...) ist Methode dieser Klasse, also muss sie über ein Application-Objekt aufgerufen werden.
+        new Application().execute(application, args);
     }
 
     /**
