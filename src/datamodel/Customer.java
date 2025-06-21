@@ -139,14 +139,17 @@ public class Customer {
      * @return chainable self reference
      * @throws IllegalArgumentException bei {@code null}/leerem Kontakt
      */
-    public Customer addContact(String contact) {
-        if (contact == null || contact.isBlank())
-            throw new IllegalArgumentException("contact empty");
-        contact = trim(contact);
-        if (contact.length() >= 6 && !contacts.contains(contact))
-            contacts.add(contact);
-        return this;
+public Customer addContact(String contact) {
+    String trimmed = trim(contact);
+    if (trimmed.length() < 6) {
+        throw new IllegalArgumentException("contact less than 6 characters: \"" + contact + "\".");
     }
+    if (!contacts.contains(trimmed)) {
+        contacts.add(trimmed);
+    }
+    return this;
+}
+
 
     /**
      * Löscht den <i>i</i>-ten Kontakt, falls Index gültig ist.
