@@ -148,7 +148,7 @@ public Customer addContact(String contact) {
         contacts.add(trimmed);
     }
     return this;
-}
+    }
 
 
     /**
