@@ -4,41 +4,42 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * The {@link Application} class contains the {@code main()} method as
- * entry point for the Java Virtual Machine. It implements the {@link Runner}
- * interface and uses command-line arguments to print formatted output.
+ * Die {@link Application}-Klasse enthält die {@code main()}-Methode als
+ * Einstiegspunkt für die Java Virtual Machine. Sie implementiert das
+ * {@link Runner}-Interface und verwendet Kommandozeilenargumente zur
+ * Ausgabe formatierter Texte.
  *
- * @version <code style="color:green">{@value application.package_info#Version}</code>
- * @author  <code style="color:blue">{@value application.package_info#Author}</code>
+ * @version {@value application.package_info#Version}
+ * @author  {@value application.package_info#Author}
  */
 public class Application implements Runner {
 
     /**
-     * Singleton instance (strict).
+     * Singleton-Instanz von {@link Application}.
      */
     private static final Application application = new Application();
 
     /**
-     * Private default constructor prevents instance creation outside this class.
+     * Privater Konstruktor verhindert externe Instanziierung.
      */
     private Application() {}
 
     /**
-     * Static {@code main()} method as entry point for the Java VM.
-     * Delegates execution to the singleton instance.
+     * Einstiegspunkt der Java VM. Erstellt eine {@link Runner}-Instanz
+     * und delegiert die Ausführung an {@code run()}.
      *
-     * @param args arguments passed from the command line
+     * @param args Kommandozeilenargumente
      */
     public static void main(String[] args) {
         application.execute(application, args);
     }
 
     /**
-     * Executes the {@link Runner} instance with a greeting message
-     * and the given command-line arguments.
+     * Führt eine {@link Runner}-Instanz aus, zeigt einen Begrüßungstext
+     * und ruft {@code run()} auf.
      *
-     * @param runner the instance to run
-     * @param args the command-line arguments
+     * @param runner das auszuführende {@link Runner}-Objekt
+     * @param args Kommandozeilenargumente
      */
     private void execute(Runner runner, String[] args) {
         String className = runner.getClass().getSimpleName();
@@ -51,9 +52,9 @@ public class Application implements Runner {
     }
 
     /**
-     * Prints all passed command-line arguments, one per line.
+     * Gibt alle übergebenen Kommandozeilenargumente einzeln aus.
      *
-     * @param args the arguments passed from the command line
+     * @param args die Kommandozeilenargumente
      */
     @Override
     public void run(String[] args) {

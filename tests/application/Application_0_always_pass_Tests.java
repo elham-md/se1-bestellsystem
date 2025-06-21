@@ -4,70 +4,60 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Test class to verify the JUnit test setup.
- * All {@code @Test} methods in this class always pass.
- * 
- * <p>Tests should run both in the IDE and from the terminal.
- * Note: Most test runners execute tests in parallel, so the order
- * is undefined unless explicitly controlled. Avoid shared state.
+ * Testklasse zur Verifikation des JUnit-Setups.
+ * <p>
+ * Alle {@code @Test}-Methoden in dieser Klasse bestehen immer – damit
+ * lässt sich prüfen, ob JUnit sowohl in der IDE als auch im Terminal korrekt
+ * konfiguriert ist.
+ * </p>
  *
- * @version <code style="color:green">{@value application.package_info#Version}</code>
- * @author <code style="color:blue">{@value application.package_info#Author}</code>
+ * <p>
+ * Viele Test-Runner führen Tests parallel aus; die Reihenfolge ist daher
+ * grundsätzlich undefiniert, sofern sie nicht explizit durch {@link Order}
+ * festgelegt wird. Gemeinsamen (statischen) Zustand solltest du vermeiden.
+ * </p>
+ *
+ * @version {@value application.package_info#Version}
+ * @author  {@value application.package_info#Author}
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class Application_0_always_pass_Tests {
 
-    /**
-     * Method executed once before any {@code @Test} method.
-     */
+    /** Wird einmalig vor allen {@code @Test}-Methoden ausgeführt. */
     @BeforeAll
-    public static void setUpBeforeClass() {
+    static void setUpBeforeClass() {
         System.out.println("setUpBeforeClass() runs once before any @Test method");
     }
 
-    /**
-     * Method executed before each {@code @Test} method.
-     */
+    /** Wird vor jeder {@code @Test}-Methode ausgeführt. */
     @BeforeEach
-    public void setUpBeforeEach() {
+    void setUpBeforeEach() {
         System.out.println("setUpBeforeEach() runs before each @Test method");
     }
 
-    /**
-     * Method executed after each {@code @Test} method.
-     */
-    @AfterEach
-    public void tearDownAfterEach() {
-        System.out.println("tearDownAfterEach() runs after each @Test method");
-    }
-
-    /**
-     * Method executed once after all {@code @Test} methods.
-     */
-    @AfterAll
-    public static void tearDownAfterAll() {
-        System.out.println("tearDownAfterAll() runs after all @Test methods have finished");
-    }
-
-    /**
-     * First test method (always passes).
-     */
+    /** Erster Test (besteht immer). */
     @Test
     @Order(1)
     void test_001_always_pass() {
-        int expected = 10;
-        int actual = 10;
-        assertEquals(expected, actual);
+        assertEquals(10, 10);
     }
 
-    /**
-     * Second test method (always passes).
-     */
+    /** Zweiter Test (besteht immer). */
     @Test
     @Order(2)
     void test_002_always_pass() {
-        int expected = 10;
-        int actual = 10;
-        assertEquals(expected, actual);
+        assertEquals(10, 10);
+    }
+
+    /** Wird nach jeder {@code @Test}-Methode ausgeführt. */
+    @AfterEach
+    void tearDownAfterEach() {
+        System.out.println("tearDownAfterEach() runs after each @Test method");
+    }
+
+    /** Wird einmalig nach allen {@code @Test}-Methoden ausgeführt. */
+    @AfterAll
+    static void tearDownAfterAll() {
+        System.out.println("tearDownAfterAll() runs after all @Test methods have finished");
     }
 }

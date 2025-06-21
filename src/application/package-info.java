@@ -1,30 +1,28 @@
 /**
- * The {@link application} package includes classes with a {@code main()} -
- * function executable by the Java VM.
+ * Das {@link application}-Package enthält Klassen mit einer
+ * {@code main()}-Methode, die von der Java VM direkt ausgeführt werden können.
  *
- * {@code package-info.java} has been introduced with <i>Modules</i> in Java 9
- * (2017) to provide package-level documentation and project-wide variables
- * that can be used in <i>Javadoc</i>.
+ * <p>{@code package-info.java} wurde mit der Einführung der Java-Module
+ * (Java 9, 2017) eingeführt, um
+ * <ul>
+ *   <li>Package-level-Dokumentation bereitzustellen und</li>
+ *   <li>projektweite Konstanten zu definieren, die in der Javadoc angezeigt werden können.</li>
+ * </ul>
  *
- * @version <code style=color:green>{@value application.package_info#Version}</code>
- * @author <code style=color:blue>{@value application.package_info#Author}</code>
+ * @version {@value application.package_info#Version}
+ * @author  {@value application.package_info#Author}
  */
 package application;
 
-
 /**
- * Class {@code package_info} of the {@link application} package provides
- * project-wide variables used in <i>Javadoc</i>.
+ * Globale Konstanten, die in der gesamten Projektdokumentation
+ * verwendet werden können (z. B. in Javadoc-Tags).
  */
 class package_info {
 
-    /**
-     * Author attribute to appear in javadoc.
-     */
-    static final String Author = "sgraupner"; // <-- adjust with your name
+    /** Autor-Name, der in der Javadoc erscheint. */
+    static final String Author = "sgraupner";      // ← ggf. anpassen
 
-    /**
-     * Version attribute to appear in javadoc.
-     */
+    /** Versionsnummer des Projekts, die in der Javadoc erscheint. */
     static final String Version = "1.0.0-SNAPSHOT";
 }
